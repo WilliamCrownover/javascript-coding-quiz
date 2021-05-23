@@ -23,7 +23,7 @@ h2 {
     padding-top: 10px;
 }
 
-p {
+p, label {
     font-size: 1.2rem;
     margin: 0;
 }
@@ -47,6 +47,7 @@ header a {
     justify-content: center;
     flex-wrap: wrap;
     margin: 20px;
+    padding-right: 10%;
 }
 
 .contentBlock h1, .contentBlock p {
@@ -55,7 +56,7 @@ header a {
     margin-bottom: 30px;
 }
 
-button {
+button, #submitInitialsButton {
     border: none;
     border-radius: 5px;
     padding: 3px 10px;
@@ -64,7 +65,7 @@ button {
     color: var(--lightText);
 }
 
-button:hover {
+button:hover, #submitInitialsButton:hover {
     background-color: var(--colorChoiceHover);
 }
 
@@ -79,6 +80,10 @@ button:hover {
 .questionBlock {
     justify-content: flex-start;
     margin-left: 20%;
+}
+
+.finishedBlock p {
+    text-align: left;
 }
 
 .flexboxLineBreak {
