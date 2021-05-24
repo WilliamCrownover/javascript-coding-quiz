@@ -11,16 +11,19 @@
 <body>
     <header>
         <a href="#ToHighscores">View Highscores</a>
-        <p>Time: <span id="timerValue"></span>0</p>
+        <div>
+            <p>Correct: <span id="correctAnswers">10</span></p>
+            <p>Time: <span id="timerValue"></span>0</p>
+        </div>
     </header>
-    <section class="contentBlock hidden">
+    <section class="contentBlock">
         <h1>JavaScript Coding Quiz Challenge</h1>
         <div class="flexboxLineBreak"></div>
         <p>Try to answer the following JavaScript-related questions within the time limit. Wrong answers will penalize your score/time by ten seconds! Good Luck!</p>
         <div class="flexboxLineBreak"></div>
         <button class="startQuizButton">Start Quiz</button>
     </section>
-    <section class="contentBlock questionBlock hidden">
+    <section class="contentBlock questionBlock">
         <h1>The question will appear here:</h1>
         <div class="flexboxLineBreak"></div>
         <button class="answerButton" value="A">1. A</button>

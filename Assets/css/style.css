@@ -42,12 +42,16 @@ header a {
     color: var(--colorChoice);
 }
 
+header p {
+    text-align: right;
+}
+
 .contentBlock {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin: 20px;
-    padding-right: 10%;
+    
 }
 
 .contentBlock h1, .contentBlock p {
@@ -80,6 +84,7 @@ button:hover, #submitInitialsButton:hover {
 .questionBlock {
     justify-content: flex-start;
     margin-left: 20%;
+    padding-right: 10%;
 }
 
 .finishedBlock p {
