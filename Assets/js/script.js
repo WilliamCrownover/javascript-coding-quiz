@@ -13,8 +13,14 @@ var timerScoreSpan = document.querySelector("#finalScoreTime");
 
 correctAnswersEL.textContent = 0;
 timerEl.textContent = 5;
-correctScoreSpan.textContent = correctAnswersEL.textContent;
-timerScoreSpan.textContent = timerEl.textContent;
+
+function endGame() {
+    questionScreenEl.classList.add("hidden");
+    finishedScreenEl.classList.remove("hidden");
+    
+    correctScoreSpan.textContent = correctAnswersEL.textContent;
+    timerScoreSpan.textContent = timerEl.textContent;
+}
 
 function startTimer() {
     var timerInterval = setInterval(function() {
@@ -24,13 +30,13 @@ function startTimer() {
             clearInterval(timerInterval);
             endGame();
         }
-
     }, 1000);
 }
 
 function startGame() {
     startScreenEl.classList.add("hidden");
     questionScreenEl.classList.remove("hidden");
+    
     startTimer();
 }
 
