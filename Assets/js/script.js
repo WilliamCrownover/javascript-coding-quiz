@@ -32,9 +32,10 @@ function endGame() {
 
 function startTimer() {
     var timerInterval = setInterval(function() {
-        timerEl.textContent -= 1;
+        timeLeft -= 1;
+        timerEl.textContent = timeLeft;
 
-        if(timerEl.textContent == 0) {
+        if(timerEl.textContent == 0 || index === questions.length) {
             clearInterval(timerInterval);
             endGame();
         }
@@ -83,6 +84,11 @@ function hideCorrectWrong() {
 
 function nextQuestion() {
     index++;
+    if(index === questions.length) {
+        endGame();
+        return
+    }
+
     hideCorrectWrong();
     loadQuestion();
 }
