@@ -1,4 +1,5 @@
 // GLOBL VARIABLES
+// --------------------------------------------------------------------------------
 //Element Variables
 var correctAnswersEL = document.querySelector("#correctAnswers");
 var timerEl = document.querySelector("#timerValue");
@@ -12,9 +13,13 @@ var finishedScreenEl = document.querySelector("#finishScreen");
 var correctScoreSpan = document.querySelector("#answeredCorrectScore");
 var timerScoreSpan = document.querySelector("#finalScoreTime");
 
+var index = 0;
+
 correctAnswersEL.textContent = 0;
 timerEl.textContent = 5;
 
+// DECLARED FUNCTIONS
+// --------------------------------------------------------------------------------
 function endGame() {
     questionScreenEl.classList.add("hidden");
     finishedScreenEl.classList.remove("hidden");
@@ -34,10 +39,24 @@ function startTimer() {
     }, 1000);
 }
 
+// Fisher-Yates shuffle
+function shuffleArray(array) {
+    for( var i = array.length - 1; i > 0; i-- ) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
 function loadQuestion() {
-    questionEl.textContent = questions[0].question;
-    for(var i = 0; i < questions[0].choices.length; i++) {
-        questionScreenEl.children[2 + i*2].textContent = questions[0].choices[i];
+    questionEl.textContent = questions[index].question;
+
+    questions[index].choices = shuffleArray(questions[index].choices);
+    
+    for(var i = 0; i < questions[index].choices.length; i++) {
+        questionScreenEl.children[2 + i*2].textContent = questions[index].choices[i];
     }
 }
 
@@ -45,10 +64,11 @@ function startGame() {
     startScreenEl.classList.add("hidden");
     questionScreenEl.classList.remove("hidden");
     
+    questions = shuffleArray(questions);
     startTimer();
     loadQuestion();
 }
 
-startQuizBtn.addEventListener("click", function() {
-    startGame();
-} );
+// EVENT LISTENERS
+// --------------------------------------------------------------------------------
+startQuizBtn.addEventListener("click", startGame );
