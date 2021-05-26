@@ -15,7 +15,7 @@ var timerScoreSpan = document.querySelector("#finalScoreTime");
 
 var index;
 var correctAnswers = 0;
-var timeLeft = 100;
+var timeLeft = 15*questions.length;
 
 correctAnswersEL.textContent = correctAnswers;
 timerEl.textContent = timeLeft;
@@ -23,11 +23,16 @@ timerEl.textContent = timeLeft;
 // DECLARED FUNCTIONS
 // --------------------------------------------------------------------------------
 function endGame() {
+    if(timeLeft < 0) {
+        timeLeft = 0;
+        timerEl.textContent = timeLeft;
+    }
+
     questionScreenEl.classList.add("hidden");
     finishedScreenEl.classList.remove("hidden");
     
-    correctScoreSpan.textContent = correctAnswersEL.textContent;
-    timerScoreSpan.textContent = timerEl.textContent;
+    correctScoreSpan.textContent = correctAnswers;
+    timerScoreSpan.textContent = timeLeft;
 }
 
 function startTimer() {
@@ -35,7 +40,7 @@ function startTimer() {
         timeLeft -= 1;
         timerEl.textContent = timeLeft;
 
-        if(timerEl.textContent == 0 || index === questions.length) {
+        if(timeLeft <= 0 || index === questions.length) {
             clearInterval(timerInterval);
             endGame();
         }
@@ -69,6 +74,8 @@ function startGame() {
     questionScreenEl.classList.remove("hidden");
     
     index = 0;
+    correctAnswers = 0;
+    timeLeft = 15*questions.length;
     questions = shuffleArray(questions);
     
     startTimer();
@@ -94,8 +101,8 @@ function nextQuestion() {
 }
 
 function checkAnswer(event) {
-    var choice = event.target.value;
-    if(choice === questions[index].correct) {
+    var answer = event.target.value;
+    if(answer === questions[index].correct) {
         correctAnswers++;
         correctAnswersEL.textContent = correctAnswers;
         correctEl.classList.remove("hidden");
@@ -103,7 +110,6 @@ function checkAnswer(event) {
         
     } else {
         timeLeft -= 10;
-        timerEl.textContent = timeLeft;
         wrongEl.classList.remove("hidden");
         nextQuestion();
     }
