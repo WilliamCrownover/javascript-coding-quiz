@@ -12,6 +12,9 @@ var wrongEl = document.querySelector(".wrong");
 var finishedScreenEl = document.querySelector("#finishScreen");
 var correctScoreSpan = document.querySelector("#answeredCorrectScore");
 var timerScoreSpan = document.querySelector("#finalScoreTime");
+var initalsFormEl = document.querySelector("#initalsForm");
+var initalsEl = document.querySelector("#initials");
+var scoresListEl = document.querySelector("#highscoresList");
 
 var index;
 var correctAnswers = 0;
@@ -115,7 +118,41 @@ function checkAnswer(event) {
     }
 }
 
+function saveScore(event) {
+    event.preventDefault();
+    var scoreData = {
+        initals: initalsEl.value,
+        answerScore: correctAnswers,
+        timeScore: timeLeft
+    };
+
+    var storedHighscoresJSON = localStorage.getItem("storedHighscores");
+    var storedHighscores;
+
+    if(storedHighscoresJSON) {
+        storedHighscores = JSON.parse(storedHighscoresJSON);
+        storedHighscores.push(scoreData);
+    } else {
+        storedHighscores = [scoreData];
+    }
+    console.log("~ storedHighscores", storedHighscores);
+
+    localStorage.setItem("storedHighscores", JSON.stringify(storedHighscores));
+
+    // var li = document.createElement("li");
+    // li.textContent = `${initalsEl.value} ${correctAnswers} Correct in ${timeLeft} Seconds`;
+    // scoresListEl.append(li);
+    // console.log("~ scoresListEl", scoresListEl);
+
+    // savedScores[savedScores.length] = 
+
+    // localStorage.setItem("scoreList", JSON.stringify(scoresListEl));
+    // window.location = "./Assets/html/highscores.html";
+
+}
+
 // EVENT LISTENERS
 // --------------------------------------------------------------------------------
 startQuizBtn.addEventListener("click", startGame );
 questionScreenEl.addEventListener("click", checkAnswer);
+initalsFormEl.addEventListener("submit", saveScore);
