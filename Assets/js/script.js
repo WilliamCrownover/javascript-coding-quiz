@@ -104,22 +104,25 @@ function nextQuestion() {
 }
 
 function checkAnswer(event) {
-    var answer = event.target.value;
-    if(answer === questions[index].correct) {
-        correctAnswers++;
-        correctAnswersEL.textContent = correctAnswers;
-        correctEl.classList.remove("hidden");
-        nextQuestion();
-        
-    } else {
-        timeLeft -= 10;
-        wrongEl.classList.remove("hidden");
-        nextQuestion();
+    if(event.target.type === "submit") {
+        var answer = event.target.value;
+        if(answer === questions[index].correct) {
+            correctAnswers++;
+            correctAnswersEL.textContent = correctAnswers;
+            correctEl.classList.remove("hidden");
+            nextQuestion();
+            
+        } else {
+            timeLeft -= 10;
+            wrongEl.classList.remove("hidden");
+            nextQuestion();
+        }
     }
 }
 
 function saveScore(event) {
     event.preventDefault();
+
     var scoreData = {
         initals: initalsEl.value,
         answerScore: correctAnswers,
@@ -135,20 +138,10 @@ function saveScore(event) {
     } else {
         storedHighscores = [scoreData];
     }
-    console.log("~ storedHighscores", storedHighscores);
 
     localStorage.setItem("storedHighscores", JSON.stringify(storedHighscores));
 
-    // var li = document.createElement("li");
-    // li.textContent = `${initalsEl.value} ${correctAnswers} Correct in ${timeLeft} Seconds`;
-    // scoresListEl.append(li);
-    // console.log("~ scoresListEl", scoresListEl);
-
-    // savedScores[savedScores.length] = 
-
-    // localStorage.setItem("scoreList", JSON.stringify(scoresListEl));
-    // window.location = "./Assets/html/highscores.html";
-
+    window.location = "./Assets/html/highscores.html";
 }
 
 // EVENT LISTENERS
