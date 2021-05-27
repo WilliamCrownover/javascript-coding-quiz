@@ -2,6 +2,7 @@
 // --------------------------------------------------------------------------------
 //Element Variables
 var highscoresListEl = document.querySelector("#highscoresList");
+var clearScoresBtn = document.querySelector("#clearHighscoresButton");
 
 var storedHighscoresJSON = localStorage.getItem("storedHighscores");
 var storedHighscores;
@@ -17,3 +18,8 @@ for(var i = 0; i < storedHighscores.length; i++) {
     li.textContent = `${storedHighscores[i].initals} --- ${storedHighscores[i].answerScore} Correct in ${storedHighscores[i].timeScore} Seconds`;
     highscoresListEl.append(li);
 }
+
+clearScoresBtn.addEventListener("click", function() {
+    localStorage.clear();
+    location.reload();
+} );
