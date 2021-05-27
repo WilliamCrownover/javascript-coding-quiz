@@ -14,7 +14,6 @@ var correctScoreSpan = document.querySelector("#answeredCorrectScore");
 var timerScoreSpan = document.querySelector("#finalScoreTime");
 var initalsFormEl = document.querySelector("#initalsForm");
 var initalsEl = document.querySelector("#initials");
-var scoresListEl = document.querySelector("#highscoresList");
 
 var index;
 var correctAnswers = 0;
@@ -67,8 +66,8 @@ function loadQuestion() {
     questions[index].choices = shuffleArray(questions[index].choices);
 
     for(var i = 0; i < questions[index].choices.length; i++) {
-        questionScreenEl.children[2 + i*2].textContent = questions[index].choices[i];
-        questionScreenEl.children[2 + i*2].value = questions[index].choices[i];
+        questionScreenEl.children[1 + i].textContent = questions[index].choices[i];
+        questionScreenEl.children[1 + i].value = questions[index].choices[i];
     }
 }
 

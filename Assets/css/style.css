@@ -1,20 +1,22 @@
+/* Global Attributes and Variables */
 * {
     font-family: Helvetica, Arial, sans-serif;
 }
 
 :root {
-    --colorChoice: #bd5e06;
-    --colorChoiceHover: #db8a3e;
+    --buttonColor: #bd5e06;
+    --buttonColorHover: #db8a3e;
     --listColorOne: #ffe7d1;
     --listColorTwo: #fcf4ed;
     --lightText: white;
-    --correctWrong: rgb(187, 187, 187);
+    --correctWrong: #bbbbbb;
 }
 
+/* --------------------------------------------------------------- */
+/* Element Styles */
 h1 {
     font-size: 2.3rem;
 }
-
 h2 {
     font-size: 1.8rem;
     font-weight: 500;
@@ -24,32 +26,35 @@ h2 {
     flex: 0 1 800px;
     padding-top: 10px;
 }
-
+a {
+    text-decoration: none;
+    color: var(--buttonColor);
+}
 p, label, li {
     font-size: 1.2rem;
     margin: 0;
     list-style: none;
 }
-
 li {
     padding: 2px;
     padding-left: 4px;
 }
-
 ul {
     padding: 0;
     margin: 30px 0;
-    flex: 0 1 800px;
 }
 
+/* --------------------------------------------------------------- */
+/* Alternating list colors */
 li:nth-child(odd) {
     background-color: var(--listColorOne);
 }
-
 li:nth-child(even) {
     background-color: var(--listColorTwo);
 }
 
+/* --------------------------------------------------------------- */
+/* Header Styles */
 header {
     display: flex;
     justify-content: space-between;
@@ -57,61 +62,50 @@ header {
     font-size: 1.2rem;
     padding: 0;
     margin: 10px;
-    margin-bottom: 50px;
-}
-
-header a {
-    text-decoration: none;
-    color: var(--colorChoice);
+    margin-bottom: 80px;
 }
 
 header p {
     text-align: right;
 }
 
+/* --------------------------------------------------------------- */
+/* Content Block Styles */
 .contentBlock {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 20px;
-    
+    margin: auto;
+    width: 800px;
 }
 
 .contentBlock h1, .contentBlock p {
-    flex: 0 1 800px;
     text-align: center;
     margin-bottom: 30px;
 }
 
+/* --------------------------------------------------------------- */
+/* Button Styles */
 button, #submitInitialsButton {
     border: none;
     border-radius: 5px;
     padding: 3px 10px;
+    margin: 0px auto;
     margin-bottom: 5px;
-    background-color: var(--colorChoice);
+    background-color: var(--buttonColor);
     color: var(--lightText);
 }
 
 button:hover, #submitInitialsButton:hover {
-    background-color: var(--colorChoiceHover);
+    background-color: var(--buttonColorHover);
 }
 
-.questionBlock h1, .questionBlock button {
+/* --------------------------------------------------------------- */
+/* Tweaking Styles */
+.leftAlignment h1, .leftAlignment p {
     text-align: left;
 }
 
-.questionBlock button {
+.leftAlignment button {
+    display: block;
     margin-left: 10px;
-}
-
-.questionBlock {
-    justify-content: flex-start;
-    margin-left: 20%;
-    padding-right: 10%;
-}
-
-.finishedBlock p {
-    text-align: left;
 }
 
 .highscoresBlock h1 {
@@ -119,10 +113,16 @@ button:hover, #submitInitialsButton:hover {
     margin-bottom: 0px;
 }
 
-.flexboxLineBreak {
-    flex-basis: 100%;
+.highscoresBlock button {
+    display: inline;
 }
 
+.centerContent {
+    display: flex;
+    justify-content: center;
+}
+
+/* Applied in JS to alter game state */
 .hidden {
     display: none;
 }
