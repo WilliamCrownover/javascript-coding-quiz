@@ -126,3 +126,21 @@ button:hover, #submitInitialsButton:hover {
 .hidden {
     display: none;
 }
+
+/* --------------------------------------------------------------- */
+/* Media Queries */
+@media screen and (max-width: 860px) {
+    .contentBlock {
+        width: 93%;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    p, label, li {
+        font-size: 1rem;
+    }
+}
