@@ -1,4 +1,4 @@
-//DECLARING QUESTION OBJECTS
+//DECLARING QUESTION OBJECTS ARRAY
 var questions = [
     {
     question: "Which is the correct form to output a message to the dev tools?",
@@ -7,7 +7,7 @@ var questions = [
         "console.log()",
         "log.console()",
         "displayContent()",
-        "whatIsThis()"
+        "showMeWhatThisIs()"
         ]
     },
     {
@@ -81,13 +81,43 @@ var questions = [
         ]
     },
     {
-    question: "If we want a variable to be accesible to any part of our code we declare it _____.",
+    question: "If we want a variable to be accessible to any part of our code we declare it _____.",
     correct: "Globally",
     choices: [
         "Globally",
-        "Universaly",
+        "Universally",
         "Locally",
         "Openly"
+        ]
+    },
+    {
+    question: "Which keyword is NOT used to declare a variable?",
+    correct: "store",
+    choices: [
+        "store",
+        "var",
+        "let",
+        "const"
+        ]
+    },
+    {
+    question: "What property of an array returns how many items are stored in it?",
+    correct: ".length",
+    choices: [
+        ".length",
+        ".count",
+        ".sum",
+        ".total"
+        ]
+    },
+    {
+    question: "The value of _____ is determined by where it is used and always refers to an object.",
+    correct: "this",
+    choices: [
+        "this",
+        "that",
+        "here",
+        "aforementioned"
         ]
     }
 ];
