@@ -15,7 +15,7 @@ if(storedHighscoresJSON) {
 
 for(var i = 0; i < storedHighscores.length; i++) {
     var li = document.createElement("li");
-    li.textContent = `${storedHighscores[i].initals} --- ${storedHighscores[i].answerScore} Correct in ${storedHighscores[i].timeScore} Seconds`;
+    li.textContent = `${i+1}. ${storedHighscores[i].initals} --- ${storedHighscores[i].answerScore} Correct in ${storedHighscores[i].timeScore} Seconds`;
     highscoresListEl.append(li);
 }
 

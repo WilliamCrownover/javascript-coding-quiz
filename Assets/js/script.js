@@ -17,17 +17,25 @@ var initalsEl = document.querySelector("#initials");
 
 var index;
 var correctAnswers = 0;
-var timeLeft = 15*questions.length;
+var timeLeft = 10*questions.length;
+var timerInterval;
 
 correctAnswersEL.textContent = correctAnswers;
 timerEl.textContent = timeLeft;
 
 // --------------------------------------------------------------------------------
 // DECLARED FUNCTIONS
+function updateTimerValue() {
+    timerEl.textContent = timeLeft;
+}
+
 function endGame() {
+    clearInterval(timerInterval);
+    updateTimerValue();
+
     if(timeLeft < 0) {
         timeLeft = 0;
-        timerEl.textContent = timeLeft;
+        updateTimerValue();
     }
 
     questionScreenEl.classList.add("hidden");
@@ -38,9 +46,9 @@ function endGame() {
 }
 
 function startTimer() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         timeLeft -= 1;
-        timerEl.textContent = timeLeft;
+        updateTimerValue();
 
         if(timeLeft <= 0 || index === questions.length) {
             clearInterval(timerInterval);
@@ -78,7 +86,7 @@ function startGame() {
     
     index = 0;
     correctAnswers = 0;
-    timeLeft = 15*questions.length;
+    timeLeft = 10*questions.length;
     questions = shuffleArray(questions);
     
     startTimer();
@@ -94,6 +102,9 @@ function hideCorrectWrong() {
 
 function nextQuestion() {
     index++;
+    
+    updateTimerValue();
+
     if(index === questions.length) {
         endGame();
         return
