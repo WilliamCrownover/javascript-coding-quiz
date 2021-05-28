@@ -1,11 +1,11 @@
 // GLOBL VARIABLES
-// --------------------------------------------------------------------------------
 //Element Variables
 var correctAnswersEL = document.querySelector("#correctAnswers");
 var timerEl = document.querySelector("#timerValue");
 var startScreenEl = document.querySelector("#startScreen");
 var startQuizBtn = document.querySelector("#startQuizButton");
 var questionScreenEl = document.querySelector("#questionScreen");
+var questionCoutdownEl = document.querySelector("#questionCountDown");
 var questionEl = document.querySelector("#theQuestion");
 var correctEl = document.querySelector(".correct");
 var wrongEl = document.querySelector(".wrong");
@@ -22,8 +22,8 @@ var timeLeft = 15*questions.length;
 correctAnswersEL.textContent = correctAnswers;
 timerEl.textContent = timeLeft;
 
-// DECLARED FUNCTIONS
 // --------------------------------------------------------------------------------
+// DECLARED FUNCTIONS
 function endGame() {
     if(timeLeft < 0) {
         timeLeft = 0;
@@ -62,12 +62,13 @@ function shuffleArray(array) {
 
 function loadQuestion() {
     questionEl.textContent = questions[index].question;
+    questionCoutdownEl.textContent = questions.length - index;
 
     questions[index].choices = shuffleArray(questions[index].choices);
 
     for(var i = 0; i < questions[index].choices.length; i++) {
-        questionScreenEl.children[1 + i].textContent = questions[index].choices[i];
-        questionScreenEl.children[1 + i].value = questions[index].choices[i];
+        questionScreenEl.children[2 + i].textContent = questions[index].choices[i];
+        questionScreenEl.children[2 + i].value = questions[index].choices[i];
     }
 }
 
@@ -143,8 +144,8 @@ function saveScore(event) {
     window.location = "./Assets/html/highscores.html";
 }
 
-// EVENT LISTENERS
 // --------------------------------------------------------------------------------
+// EVENT LISTENERS
 startQuizBtn.addEventListener("click", startGame );
 questionScreenEl.addEventListener("click", checkAnswer);
 initalsFormEl.addEventListener("submit", saveScore);
