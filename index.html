@@ -17,8 +17,8 @@
     <header>
         <a href="./Assets/html/highscores.html">View Highscores</a>
         <div>
-            <p>Correct: <span id="correctAnswers"></span></p>
-            <p>Time: <span id="timerValue"></span></p>
+            <p>Correct: <span id="correctAnswers">0</span></p>
+            <p>Time: <span id="timerValue">120</span></p>
         </div>
     </header>
 
@@ -43,10 +43,8 @@
                 <button value="B">2. B</button>
                 <button value="C">3. C</button>
                 <button value="D">4. D</button>
-                <h2 class="correct hidden">Correct!</h2>
-                <h2 class="wrong hidden">Wrong!</h2>
             </section>
-
+            
             <!-- Game finished score with intials submission form -->
             <section class="hidden" id="finishScreen">
                 <h1>Finished!</h1>
@@ -57,6 +55,10 @@
                     <input type="submit" id="submitInitialsButton" value="Submit">
                 </form>
             </section>
+
+            <!-- Response to answer choice -->
+            <h2 class="correct hidden">Correct!</h2>
+            <h2 class="wrong hidden">Wrong!</h2>
         </div>
     </main>
 
