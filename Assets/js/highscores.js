@@ -1,17 +1,10 @@
 // GLOBL VARIABLES
-// --------------------------------------------------------------------------------
 //Element Variables
 var highscoresListEl = document.querySelector("#highscoresList");
 var clearScoresBtn = document.querySelector("#clearHighscoresButton");
 
-var storedHighscoresJSON = localStorage.getItem("storedHighscores");
-var storedHighscores;
-
-if(storedHighscoresJSON) {
-    storedHighscores = JSON.parse(storedHighscoresJSON);
-} else {
-    storedHighscores = [];
-}
+// Retrieve local data variable
+var storedHighscores = JSON.parse(localStorage.getItem("storedHighscores")) || [];
 
 for(var i = 0; i < storedHighscores.length; i++) {
     var li = document.createElement("li");
