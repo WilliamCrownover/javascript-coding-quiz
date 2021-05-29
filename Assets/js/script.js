@@ -7,6 +7,8 @@ var startQuizBtn = document.querySelector("#startQuizButton");
 var questionScreenEl = document.querySelector("#questionScreen");
 var questionCoutdownEl = document.querySelector("#questionCountDown");
 var questionEl = document.querySelector("#theQuestion");
+var buttonContainerEl = document.querySelector("#buttonContainer");
+console.log("~ buttonContainerEl", buttonContainerEl);
 var correctEl = document.querySelector(".correct");
 var wrongEl = document.querySelector(".wrong");
 var finishedScreenEl = document.querySelector("#finishScreen");
@@ -71,15 +73,18 @@ function shuffleArray(array) {
     return array;
 }
 
-// Loads a question object's properties to the question section of html
+// Loads a question object's properties to the question section of html generating buttons for each answer
 function loadQuestion() {
+    buttonContainerEl.innerHTML = "";
     questionEl.textContent = questions[index].question;
     questionCoutdownEl.textContent = questions.length - index;
     questions[index].choices = shuffleArray(questions[index].choices);
 
     for(var i = 0; i < questions[index].choices.length; i++) {
-        questionScreenEl.children[2 + i].textContent = questions[index].choices[i];
-        questionScreenEl.children[2 + i].value = questions[index].choices[i];
+        var button = document.createElement("button");
+        button.setAttribute("data-answer", questions[index].choices[i]);
+        button.textContent = `${i+1} ${questions[index].choices[i]}`;
+        buttonContainerEl.append(button);
     }
 }
 
@@ -125,7 +130,7 @@ function nextQuestion() {
 // Evaluates if the answer button value was correct or wrong and updates counters in response
 function checkAnswer(event) {
     if(event.target.type === "submit") {
-        var answer = event.target.value;
+        var answer = event.target.getAttribute("data-answer");
 
         clearTimeout(correctWrongTimeout);
         hideCorrectWrong()
