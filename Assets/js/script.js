@@ -123,12 +123,14 @@ function nextQuestion() {
     loadQuestion();
 }
 
+// If the answer was correct the counters and display are updated
 function correctAnswer() {
     correctAnswers++;
     correctAnswersEL.textContent = correctAnswers;
     correctEl.classList.remove("hidden");
 }
 
+// if the answer was wrong the timer is updated by 10 seconds
 function wrongAnswer() {
     timeLeft -= 10;
     updateTimerValue();
