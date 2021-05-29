@@ -1,16 +1,19 @@
 // GLOBAL VARIABLES
 // Element Variables
+    // Header
 var correctAnswersEL = document.querySelector("#correctAnswers");
 var timerEl = document.querySelector("#timerValue");
+    // Start Screen
 var startScreenEl = document.querySelector("#startScreen");
 var startQuizBtn = document.querySelector("#startQuizButton");
+    // Question Screen
 var questionScreenEl = document.querySelector("#questionScreen");
 var questionCoutdownEl = document.querySelector("#questionCountDown");
 var questionEl = document.querySelector("#theQuestion");
 var buttonContainerEl = document.querySelector("#buttonContainer");
-console.log("~ buttonContainerEl", buttonContainerEl);
 var correctEl = document.querySelector(".correct");
 var wrongEl = document.querySelector(".wrong");
+    // Game End Screen
 var finishedScreenEl = document.querySelector("#finishScreen");
 var correctScoreSpan = document.querySelector("#answeredCorrectScore");
 var timerScoreSpan = document.querySelector("#finalScoreTime");
@@ -34,12 +37,10 @@ function updateTimerValue() {
 // Stops the timer and switches content to finished screen with score
 function endGame() {
     clearInterval(timerInterval);
-    updateTimerValue();
 
-    if(timeLeft < 0) {
-        timeLeft = 0;
-        updateTimerValue();
-    }
+    if(timeLeft < 0) timeLeft = 0;
+    
+    updateTimerValue();
 
     questionScreenEl.classList.add("hidden");
     finishedScreenEl.classList.remove("hidden");
@@ -55,20 +56,15 @@ function startTimer() {
 
         updateTimerValue();
 
-        if(timeLeft <= 0 || index === questions.length) {
-            clearInterval(timerInterval);
-            endGame();
-        }
+        if(timeLeft <= 0 || index === questions.length) endGame();
     }, 1000);
 }
 
-// Fisher-Yates shuffle: shuffles the question order and answer order
+// Fisher-Yates shuffle: used to shuffle the question order and answer order
 function shuffleArray(array) {
     for( var i = array.length - 1; i > 0; i-- ) {
         var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
@@ -88,7 +84,7 @@ function loadQuestion() {
     }
 }
 
-// Activated on button click, switches to question content and initializes variable values
+// Activated on start button click, switches to question content and initializes variable values
 function startGame() {
     startScreenEl.classList.add("hidden");
     questionScreenEl.classList.remove("hidden");
@@ -117,35 +113,39 @@ function correctWrongTimer() {
 function nextQuestion() {
     index++;
 
+    correctWrongTimer();
+
     if(index === questions.length) {
-        correctWrongTimer();
         endGame();
         return
     }
 
-    correctWrongTimer();
     loadQuestion();
 }
 
-// Evaluates if the answer button value was correct or wrong and updates counters in response
+function correctAnswer() {
+    correctAnswers++;
+    correctAnswersEL.textContent = correctAnswers;
+    correctEl.classList.remove("hidden");
+}
+
+function wrongAnswer() {
+    timeLeft -= 10;
+    updateTimerValue();
+    wrongEl.classList.remove("hidden");
+}
+
+// Evaluates if the answer button value was correct or wrong
 function checkAnswer(event) {
     if(event.target.type === "submit") {
+        clearTimeout(correctWrongTimeout);
+        hideCorrectWrong();
+        
         var answer = event.target.getAttribute("data-answer");
 
-        clearTimeout(correctWrongTimeout);
-        hideCorrectWrong()
+        answer === questions[index].correct ? correctAnswer() : wrongAnswer();
 
-        if(answer === questions[index].correct) {
-            correctAnswers++;
-            correctAnswersEL.textContent = correctAnswers;
-            correctEl.classList.remove("hidden");
-            nextQuestion();
-        } else {
-            timeLeft -= 10;
-            updateTimerValue();
-            wrongEl.classList.remove("hidden");
-            nextQuestion();
-        }
+        nextQuestion();
     }
 }
 
@@ -159,15 +159,9 @@ function saveScore(event) {
         timeScore: timeLeft
     };
 
-    var storedHighscoresJSON = localStorage.getItem("storedHighscores");
-    var storedHighscores;
-
-    if(storedHighscoresJSON) {
-        storedHighscores = JSON.parse(storedHighscoresJSON);
-        storedHighscores.push(scoreData);
-    } else {
-        storedHighscores = [scoreData];
-    }
+    var storedHighscores = JSON.parse(localStorage.getItem("storedHighscores")) || [];
+    
+    storedHighscores.push(scoreData);
 
     localStorage.setItem("storedHighscores", JSON.stringify(storedHighscores));
 

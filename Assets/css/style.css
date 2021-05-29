@@ -45,7 +45,7 @@ ul {
 }
 
 /* --------------------------------------------------------------- */
-/* Alternating list colors */
+/* Alternating highscores list colors */
 li:nth-child(odd) {
     background-color: var(--listColorOne);
 }
@@ -91,6 +91,7 @@ button, #submitInitialsButton {
     margin-bottom: 5px;
     background-color: var(--buttonColor);
     color: var(--lightText);
+    position: relative;
 }
 
 button:hover, #submitInitialsButton:hover {
@@ -159,5 +160,9 @@ button:hover, #submitInitialsButton:hover {
 
     p, label, li {
         font-size: 1rem;
+    }
+
+    button:hover, #submitInitialsButton:hover {
+        background-color: var(--buttonColor);
     }
 }
