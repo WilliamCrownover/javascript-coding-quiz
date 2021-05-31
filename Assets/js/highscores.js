@@ -13,13 +13,7 @@ storedHighscores.sort(function(a,b) {
     var answerB = b.answerScore;
     var timeB = b.timeScore;
 
-    if(answerA < answerB ) return 1;
-    if(answerA > answerB ) return -1;
-    if(answerA === answerB) {
-        if(timeA < timeB) return 1;
-        if(timeA > timeB) return -1;
-    }
-    return 0;
+    return (answerA < answerB ? 1 : (answerA > answerB ? -1 : (answerA === answerB ? (timeA < timeB ? 1 : (timeA > timeB ? -1 : 0)) : null)));
 });
 
 // Load list to page
@@ -33,4 +27,4 @@ for(var i = 0; i < storedHighscores.length; i++) {
 clearScoresBtn.addEventListener("click", function() {
     localStorage.clear();
     location.reload();
-} );
+});

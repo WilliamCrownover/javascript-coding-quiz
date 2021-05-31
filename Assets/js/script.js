@@ -79,7 +79,7 @@ function loadQuestion() {
     for(var i = 0; i < questions[index].choices.length; i++) {
         var button = document.createElement("button");
         button.setAttribute("data-answer", questions[index].choices[i]);
-        button.textContent = `${i+1} ${questions[index].choices[i]}`;
+        button.textContent = questions[index].choices[i];
         buttonContainerEl.append(button);
     }
 }
