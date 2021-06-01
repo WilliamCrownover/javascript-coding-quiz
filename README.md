@@ -7,8 +7,8 @@ Through the process of building this game I learned several useful programming t
 ## Live Site
 https://williamcrownover.github.io/javascript-coding-quiz/
 
-Start Screen
-![Asking for password length](./Assets/images/startGame.jpg)
+#### Start Screen
+![The game start screen](./Assets/images/startGame.jpg)
 
-Example Question
-![Asking for password length](./Assets/images/question.jpg)
+#### Example Question
+![An example question from the game](./Assets/images/question.jpg)
